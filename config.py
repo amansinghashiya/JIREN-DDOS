@@ -1,5 +1,5 @@
 # Don't use quotes( " and ' )
-#SCRIPT BY SharpX72
+#SCRIPT BY JIREN
   
 #Enter Your Bot Token here get it from @botfather
 BOT_TOKEN=("6963762658:AAEg_OFDu9QzyM-SL4daqfROm7I4918PQ7c")
