@@ -17,7 +17,12 @@ from telebot.types import ReplyKeyboardMarkup, KeyboardButton
 loop = asyncio.get_event_loop()
 
 TOKEN = '6963762658:AAEg_OFDu9QzyM-SL4daqfROm7I4918PQ7c'
-MONGO_URI = 'mongodb+srv://Soul:JYAuvlizhw7wqLOb@soul.tsga4.mongodb.net''https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http,socks4,socks5&timeout=500&country=all&ssl=all&anonymity=all''
+
+
+MONGO_URI = 'https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http,socks4,socks5&timeout=500&country=all&ssl=all&anonymity=all''
+
+
+
 FORWARD_CHANNEL_ID = -100
 CHANNEL_ID = -100
 error_channel_id = -100
