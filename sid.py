@@ -7,7 +7,7 @@ import os
 import time
 from datetime import timedelta
 from threading import Timer
-import pytz
+
 
 # Insert your Telegram bot token here
 bot = telebot.TeleBot('6963762658:AAEg_OFDu9QzyM-SL4daqfROm7I4918PQ7c')
@@ -24,8 +24,8 @@ LOG_FILE = "log.txt"
 # File to store allowed user access
 USER_ACCESS_FILE = "users_access.txt"
 
-# IST timezone
-ist = pytz.timezone('Asia/Kolkata')
+
+
 
 # Function to read user IDs from the file
 def read_users():
@@ -163,7 +163,7 @@ def add_user(message):
                         file.write(f"{user_to_add}\n")
                     
                     # Get current time in IST
-                    current_time = datetime.datetime.now(ist)
+                    current_time = datetime.datetime.now()
                     
                     # Calculate the expiry time based on the time unit
                     if time_unit == 'minutes':
